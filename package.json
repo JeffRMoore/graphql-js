@@ -44,6 +44,9 @@
     "watch": "babel-node ./resources/watch.js",
     "cover": "babel-node ./node_modules/.bin/isparta cover --root src --report html _mocha -- $npm_package_options_mocha",
     "cover:lcov": "babel-node ./node_modules/.bin/isparta cover --root src --report lcovonly _mocha -- $npm_package_options_mocha",
+    "build-bench": "babel benchmarks --ignore __tests__ --out-dir bench/",
+    "benchmark-only": "node --expose-gc ./bench/latency.js",
+    "benchmark": "npm run build && npm run build-bench && npm run benchmark-only",
     "preversion": ". ./resources/checkgit.sh && npm test",
     "prepublish": ". ./resources/prepublish.sh"
   },
@@ -51,6 +54,7 @@
     "babel-runtime": ">=6.0.0"
   },
   "devDependencies": {
+    "async-benchmark-runner": "^0.1.1",
     "babel-cli": "6.6.5",
     "babel-eslint": "6.0.0-beta.5",
     "babel-plugin-syntax-async-functions": "6.5.0",
