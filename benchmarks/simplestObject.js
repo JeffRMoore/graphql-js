@@ -18,7 +18,7 @@ const schema = new GraphQLSchema({
   })
 });
 
-const simplestPossibleQuery = 
+const simplestObjectQuery = 
   `
   {
     A
@@ -31,17 +31,17 @@ const rootValue = {
 
 let documentAST; 
 
-export const Simplest = [
+export const simplestObject = [
 {
-  name: 'Simplest possible query: parse',
+  name: 'Simplest object query: parse',
   run: () => {
-    return parse(new Source(simplestPossibleQuery));
+    return parse(new Source(simplestObjectQuery));
   }
 },
 {
-  name: 'Simplest possible query: validate',
+  name: 'Simplest object query: validate',
   setUp: () => {
-    documentAST = parse(new Source(simplestPossibleQuery));
+    documentAST = parse(new Source(simplestObjectQuery));
   },
   tearDown: () => {
     documentAST = null;
@@ -51,9 +51,9 @@ export const Simplest = [
   }
 },
 {
-  name: 'Simplest possible query: execute',
+  name: 'Simplest object query: execute',
   setUp: () => {
-    documentAST = parse(new Source(simplestPossibleQuery));
+    documentAST = parse(new Source(simplestObjectQuery));
   },
   tearDown: () => {
     documentAST = null;
