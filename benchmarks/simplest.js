@@ -13,7 +13,7 @@ const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
     name: 'Query',
     fields: {
-      result: { type: GraphQLString }
+      A: { type: GraphQLString }
     }
   })
 });
@@ -21,32 +21,25 @@ const schema = new GraphQLSchema({
 const simplestPossibleQuery = 
   `
   {
-    result
+    A
   }
   `;
+
+const rootValue = {
+  'A': 'A'
+};
 
 let documentAST; 
 
 export const Simplest = [
 {
-  name: 'Execute: Simplest Possible query',
-  setUp: () => {
-    documentAST = parse(new Source(simplestPossibleQuery));
-  },
-  tearDown: () => {
-    documentAST = null;
-  },
-  startRunning: () => {
-    const rootValue = {};
-    return execute(
-      schema,
-      documentAST,
-      rootValue
-    );
+  name: 'Simplest possible query: parse',
+  run: () => {
+    return parse(new Source(simplestPossibleQuery));
   }
 },
 {
-  name: 'Validate: Simplest Possible query',
+  name: 'Simplest possible query: validate',
   setUp: () => {
     documentAST = parse(new Source(simplestPossibleQuery));
   },
@@ -58,9 +51,19 @@ export const Simplest = [
   }
 },
 {
-  name: 'Parse: Simplest Possible query',
-  run: () => {
-    return parse(new Source(simplestPossibleQuery));
+  name: 'Simplest possible query: execute',
+  setUp: () => {
+    documentAST = parse(new Source(simplestPossibleQuery));
+  },
+  tearDown: () => {
+    documentAST = null;
+  },
+  startRunning: () => {
+    return execute(
+      schema,
+      documentAST,
+      rootValue
+    );
   }
 }
 ];
