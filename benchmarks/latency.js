@@ -4,23 +4,23 @@ import { Simplest } from './latency/execution/simplest.js';
 
 
 export const NoOpAsync = {
-  name: 'Simplest possible async benchmark',
+  name: 'NO-OP Asynchronous',
   startRunning: () => {
     return Promise.resolve(false);
   }
 };
 
 export const NoOpSync = {
-  name: 'Simplest possible sync benchmark',
+  name: 'NO-OP Synchronous',
   run: () => {
     return false;
   }
 };
 
 const benchmarks = [
-  NoOpAsync,
   NoOpSync,
-  Simplest
+  NoOpAsync,
+  Simplest,
 ];
 
 startBenchmarking('My Suite', benchmarks, {}).then( results => {

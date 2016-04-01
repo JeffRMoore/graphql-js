@@ -18,45 +18,20 @@ const schema = new GraphQLSchema({
   })
 });
 
-const rootValue = {
-  result: true
-};
-
-/*
-export const Simplest = {
-  name: 'Simplest Possible query, End to End',
-  startRunning: () => {
-    return graphql(
-      schema,
-      `
-      {
-        result
-      }
-      `,
-      rootValue
-    );
+const simplestPossibleQuery = 
+  `
+  {
+    result
   }
-};
-*/
+  `;
 
 let documentAST; 
 
-export const Simplest = {
-  name: 'Simplest Possible query, Execution only',
+export const Simplest = [
+{
+  name: 'Execute: Simplest Possible query',
   setUp: () => {
-    const requestString = 
-      `
-      {
-        result
-      }
-      `;
-    const source = new Source(requestString);
-    documentAST = parse(source);
-
-    const validationErrors = validate(schema, documentAST);
-    if (validationErrors > 0) {
-      // how do we even stop?
-    }
+    documentAST = parse(new Source(simplestPossibleQuery));
   },
   tearDown: () => {
     documentAST = null;
@@ -67,6 +42,25 @@ export const Simplest = {
       schema,
       documentAST,
       rootValue
-    )
+    );
   }
-};
+},
+{
+  name: 'Validate: Simplest Possible query',
+  setUp: () => {
+    documentAST = parse(new Source(simplestPossibleQuery));
+  },
+  tearDown: () => {
+    documentAST = null;
+  },
+  startRunning: () => {
+    return validate(schema, documentAST);
+  }
+},
+{
+  name: 'Parse: Simplest Possible query',
+  run: () => {
+    return parse(new Source(simplestPossibleQuery));
+  }
+}
+];
