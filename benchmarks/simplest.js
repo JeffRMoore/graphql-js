@@ -7,7 +7,7 @@ import {
   GraphQLSchema,
   GraphQLObjectType,
   GraphQLString
-} from '../../../dist/index';
+} from '../dist/index';
 
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({

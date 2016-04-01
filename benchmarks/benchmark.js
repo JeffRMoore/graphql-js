@@ -1,6 +1,6 @@
 import { startBenchmarking } from 'async-benchmark-runner';
 
-import { Simplest } from './latency/execution/simplest.js';
+import { Simplest } from './simplest.js';
 
 
 export const NoOpAsync = {
