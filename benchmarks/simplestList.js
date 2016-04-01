@@ -66,7 +66,7 @@ export const simplestList = [
   tearDown: () => {
     documentAST = null;
   },
-  startRunning: () => {
+  run: () => {
     return validate(schema, documentAST);
   }
 },

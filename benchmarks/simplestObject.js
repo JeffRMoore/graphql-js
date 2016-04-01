@@ -46,7 +46,7 @@ export const simplestObject = [
   tearDown: () => {
     documentAST = null;
   },
-  startRunning: () => {
+  run: () => {
     return validate(schema, documentAST);
   }
 },
