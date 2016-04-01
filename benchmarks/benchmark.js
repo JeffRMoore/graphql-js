@@ -1,6 +1,7 @@
 import { startBenchmarking } from 'async-benchmark-runner';
 
 import { simplestObject } from './simplestObject.js';
+import { simplestList } from './simplestList.js';
 
 
 export const NoOpAsync = {
@@ -21,6 +22,7 @@ const benchmarks = [
   NoOpSync,
   NoOpAsync,
   simplestObject,
+  simplestList
 ];
 
 startBenchmarking('My Suite', benchmarks, {}).then( results => {
