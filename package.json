@@ -47,6 +47,7 @@
     "build-benchmarks": "babel benchmarks --ignore __tests__ --out-dir built-benchmarks/",
     "benchmark-only": "run-benchmark --suite=./built-benchmarks/suite",
     "benchmark": "npm run build && npm run build-benchmarks && npm run benchmark-only",
+    "analyze-benchmark": "analyze-benchmark",
     "preversion": ". ./resources/checkgit.sh && npm test",
     "prepublish": ". ./resources/prepublish.sh"
   },
