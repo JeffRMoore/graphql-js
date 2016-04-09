@@ -9,5 +9,5 @@ npm-debug.log
 node_modules
 coverage
 dist
-built-benchmarks
+built-benchmark
 benchmark-results

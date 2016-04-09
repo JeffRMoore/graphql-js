@@ -44,9 +44,9 @@
     "watch": "babel-node ./resources/watch.js",
     "cover": "babel-node ./node_modules/.bin/isparta cover --root src --report html _mocha -- $npm_package_options_mocha",
     "cover:lcov": "babel-node ./node_modules/.bin/isparta cover --root src --report lcovonly _mocha -- $npm_package_options_mocha",
-    "build-benchmarks": "babel benchmarks --ignore __tests__ --out-dir built-benchmarks/",
-    "benchmark-only": "run-benchmark --suite=./built-benchmarks/suite",
-    "benchmark": "npm run build && npm run build-benchmarks && npm run benchmark-only",
+    "build-benchmark": "babel benchmark --ignore __tests__ --out-dir built-benchmark/",
+    "benchmark-only": "run-benchmark --suite=./built-benchmark/suite",
+    "benchmark": "npm run build && npm run build-benchmark && npm run benchmark-only",
     "analyze-benchmark": "analyze-benchmark",
     "preversion": ". ./resources/checkgit.sh && npm test",
     "prepublish": ". ./resources/prepublish.sh"
