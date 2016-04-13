@@ -16,7 +16,7 @@ export const NoOpSync = {
   }
 };
 
-export const benchmarkSuiteName = 'GraphQL Benchmark Suite';
+export const name = 'GraphQL Benchmark Suite';
 
 export const benchmarks = [
   NoOpSync,
