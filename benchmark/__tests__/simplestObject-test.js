@@ -10,7 +10,10 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 
-import { simplestObject, simplestObjectQuerySource } from '../simplestObject';
+import {
+  simplestObjectBenchmarks,
+  simplestObjectQuerySource
+} from '../simplestObject';
 
 import { runBenchmarkTest, startBenchmarkTest } from 'async-benchmark-runner';
 
@@ -20,7 +23,10 @@ import { runBenchmarkTest, startBenchmarkTest } from 'async-benchmark-runner';
 describe('Benchmark Simplest object query Tests', () => {
   describe('Simplest object query: parse', () => {
     it('returns AST', () => {
-      const ast = runBenchmarkTest(simplestObject, 'Simplest object query: parse');
+      const ast = runBenchmarkTest(
+        simplestObjectBenchmarks,
+        'Simplest object query: parse'
+      );
       expect(ast).to.deep.equal({
         kind: 'Document',
         definitions:
@@ -89,14 +95,20 @@ describe('Benchmark Simplest object query Tests', () => {
 
   describe('Simplest object query: validate', () => {
     it('returns no errors', () => {
-      const errors = runBenchmarkTest(simplestObject, 'Simplest object query: validate');
+      const errors = runBenchmarkTest(
+        simplestObjectBenchmarks,
+        'Simplest object query: validate'
+      );
       expect(errors).to.deep.equal([], 'Should validate');
     });
   });
 
   describe('Simplest object query: execute', () => {
     it('returns expected value', async () => {
-      const result = await startBenchmarkTest(simplestObject, 'Simplest object query: execute');
+      const result = await startBenchmarkTest(
+        simplestObjectBenchmarks,
+        'Simplest object query: execute'
+      );
       expect(result).to.deep.equal({data: {A: 'A'}});
     });
   });

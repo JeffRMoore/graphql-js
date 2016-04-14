@@ -50,7 +50,7 @@ const record = {
 let data;
 let documentAST;
 
-export const simplestList = [
+export const simplestListBenchmarks = [
   {
     name: 'Simplest list query: parse',
     run: () => {

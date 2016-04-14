@@ -30,7 +30,7 @@ const rootValue = {
 
 let documentAST;
 
-export const simplestObject = [
+export const simplestObjectBenchmarks = [
   {
     name: 'Simplest object query: parse',
     run: () => {
