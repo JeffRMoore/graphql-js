@@ -1,5 +1,4 @@
 import {
-  graphql,
   Source,
   parse,
   validate,
@@ -26,7 +25,7 @@ const schema = new GraphQLSchema({
         args: {
           id: { type: GraphQLString }
         },
-        resolve: (source, args, context, info) => {
+        resolve: () => {
           return data;
         }
       }
@@ -34,7 +33,7 @@ const schema = new GraphQLSchema({
   })
 });
 
-const simplestListQuery = 
+const simplestListQuery =
   `
   {
     A
@@ -45,117 +44,117 @@ const rootValue = {
 };
 
 const record = {
-    A: 'A',
+  A: 'A',
 };
-  
+
 let data;
 let documentAST;
 
 export const simplestList = [
-{
-  name: 'Simplest list query: parse',
-  run: () => {
-    return parse(new Source(simplestListQuery));
-  }
-},
-{
-  name: 'Simplest list query: validate',
-  setUp: () => {
-    documentAST = parse(new Source(simplestListQuery));
-  },
-  tearDown: () => {
-    documentAST = null;
-  },
-  run: () => {
-    return validate(schema, documentAST);
-  }
-},
-{
-  name: 'Simplest list query: execute, n=1',
-  setUp: () => {
-    documentAST = parse(new Source(simplestListQuery));
-    data = [];
-
-    for(let i=0; i < 1; i++) {
-      data.push(record);
+  {
+    name: 'Simplest list query: parse',
+    run: () => {
+      return parse(new Source(simplestListQuery));
     }
   },
-  tearDown: () => {
-    documentAST = null;
-    data = [];
-  },
-  startRunning: () => {
-    return execute(
-      schema,
-      documentAST,
-      rootValue
-    );
-  }
-},
-{
-  name: 'Simplest list query: execute, n=10',
-  setUp: () => {
-    documentAST = parse(new Source(simplestListQuery));
-    data = [];
-
-    for(let i=0; i < 10; i++) {
-      data.push(record);
+  {
+    name: 'Simplest list query: validate',
+    setUp: () => {
+      documentAST = parse(new Source(simplestListQuery));
+    },
+    tearDown: () => {
+      documentAST = null;
+    },
+    run: () => {
+      return validate(schema, documentAST);
     }
   },
-  tearDown: () => {
-    documentAST = null;
-    data = [];
-  },
-  startRunning: () => {
-    return execute(
-      schema,
-      documentAST,
-      rootValue
-    );
-  }
-},
-{
-  name: 'Simplest list query: execute, n=100',
-  setUp: () => {
-    documentAST = parse(new Source(simplestListQuery));
-    data = [];
+  {
+    name: 'Simplest list query: execute, n=1',
+    setUp: () => {
+      documentAST = parse(new Source(simplestListQuery));
+      data = [];
 
-    for(let i=0; i < 100; i++) {
-      data.push(record);
+      for (let i = 0; i < 1; i++) {
+        data.push(record);
+      }
+    },
+    tearDown: () => {
+      documentAST = null;
+      data = [];
+    },
+    startRunning: () => {
+      return execute(
+        schema,
+        documentAST,
+        rootValue
+      );
     }
   },
-  tearDown: () => {
-    documentAST = null;
-    data = [];
-  },
-  startRunning: () => {
-    return execute(
-      schema,
-      documentAST,
-      rootValue
-    );
-  }
-},
-{
-  name: 'Simplest list query: execute, n=1000',
-  setUp: () => {
-    documentAST = parse(new Source(simplestListQuery));
-    data = [];
+  {
+    name: 'Simplest list query: execute, n=10',
+    setUp: () => {
+      documentAST = parse(new Source(simplestListQuery));
+      data = [];
 
-    for(let i=0; i < 1000; i++) {
-      data.push(record);
+      for (let i = 0; i < 10; i++) {
+        data.push(record);
+      }
+    },
+    tearDown: () => {
+      documentAST = null;
+      data = [];
+    },
+    startRunning: () => {
+      return execute(
+        schema,
+        documentAST,
+        rootValue
+      );
     }
   },
-  tearDown: () => {
-    documentAST = null;
-    data = [];
+  {
+    name: 'Simplest list query: execute, n=100',
+    setUp: () => {
+      documentAST = parse(new Source(simplestListQuery));
+      data = [];
+
+      for (let i = 0; i < 100; i++) {
+        data.push(record);
+      }
+    },
+    tearDown: () => {
+      documentAST = null;
+      data = [];
+    },
+    startRunning: () => {
+      return execute(
+        schema,
+        documentAST,
+        rootValue
+      );
+    }
   },
-  startRunning: () => {
-    return execute(
-      schema,
-      documentAST,
-      rootValue
-    );
+  {
+    name: 'Simplest list query: execute, n=1000',
+    setUp: () => {
+      documentAST = parse(new Source(simplestListQuery));
+      data = [];
+
+      for (let i = 0; i < 1000; i++) {
+        data.push(record);
+      }
+    },
+    tearDown: () => {
+      documentAST = null;
+      data = [];
+    },
+    startRunning: () => {
+      return execute(
+        schema,
+        documentAST,
+        rootValue
+      );
+    }
   }
-}
 ];

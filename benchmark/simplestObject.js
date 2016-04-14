@@ -1,5 +1,4 @@
 import {
-  graphql,
   Source,
   parse,
   validate,
@@ -18,7 +17,7 @@ const schema = new GraphQLSchema({
   })
 });
 
-const simplestObjectQuery = 
+export const simplestObjectQuerySource =
   `
   {
     A
@@ -26,44 +25,44 @@ const simplestObjectQuery =
   `;
 
 const rootValue = {
-  'A': 'A'
+  A: 'A'
 };
 
-let documentAST; 
+let documentAST;
 
 export const simplestObject = [
-{
-  name: 'Simplest object query: parse',
-  run: () => {
-    return parse(new Source(simplestObjectQuery));
+  {
+    name: 'Simplest object query: parse',
+    run: () => {
+      return parse(new Source(simplestObjectQuerySource));
+    }
+  },
+  {
+    name: 'Simplest object query: validate',
+    setUp: () => {
+      documentAST = parse(new Source(simplestObjectQuerySource));
+    },
+    tearDown: () => {
+      documentAST = null;
+    },
+    run: () => {
+      return validate(schema, documentAST);
+    }
+  },
+  {
+    name: 'Simplest object query: execute',
+    setUp: () => {
+      documentAST = parse(new Source(simplestObjectQuerySource));
+    },
+    tearDown: () => {
+      documentAST = null;
+    },
+    startRunning: () => {
+      return execute(
+        schema,
+        documentAST,
+        rootValue
+      );
+    }
   }
-},
-{
-  name: 'Simplest object query: validate',
-  setUp: () => {
-    documentAST = parse(new Source(simplestObjectQuery));
-  },
-  tearDown: () => {
-    documentAST = null;
-  },
-  run: () => {
-    return validate(schema, documentAST);
-  }
-},
-{
-  name: 'Simplest object query: execute',
-  setUp: () => {
-    documentAST = parse(new Source(simplestObjectQuery));
-  },
-  tearDown: () => {
-    documentAST = null;
-  },
-  startRunning: () => {
-    return execute(
-      schema,
-      documentAST,
-      rootValue
-    );
-  }
-}
 ];
